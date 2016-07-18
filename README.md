@@ -2,10 +2,11 @@
 A simple MIDI Time Code (MTC) visual display using an Arduino Uno (ATMega328p) and a MAX7219.
 
 MTCDisplay accepts input from a MIDI Timecode stream and displays it on a large, 7-segment display. The displays are driven and controlled by a MAX7219 driver, enabling the Arduino to focus on decoding the MIDI Timecode stream. MTCDisplay supports all four MTC framerates (24/25/29.97 drop-frame/30 frames/s), and the design can be scaled up to support almost any 7-segment, common-cathode LED display. Future work will attempt to integrate:
-	* MIDI Thru capability, enabling MTCDisplay to daisy-chain the timecode stream to other devices
-	* Visual indication of framerate
-	* A custom PCB and enclosure
-	* Linear Timecode (LTC) capability
+
+* MIDI Thru capability, enabling MTCDisplay to daisy-chain the timecode stream to other devices
+* Visual indication of framerate
+* A custom PCB and enclosure
+* Linear Timecode (LTC) capability
 
 ##"What's MIDI Timecode?"
 
