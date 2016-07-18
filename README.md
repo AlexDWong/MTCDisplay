@@ -8,7 +8,7 @@ MTCDisplay accepts input from a MIDI Timecode stream and displays it on a large,
 * A custom PCB and enclosure
 * Linear Timecode (LTC) capability
 
-##"What's MIDI Timecode?"
+##"What's (MIDI) Timecode?"
 
 Timecode is a way to synchronize equipment with each other.; for instance, an audio track could output a timecode stream to a lighting console so that lighting cues are triggered at exactly the right moment. [MIDI Timecode (MTC)](https://en.wikipedia.org/wiki/MIDI_timecode) is timecode transmitted between devices using the MIDI protocol and interface, and is based off [SMPTE Timecode](https://en.wikipedia.org/wiki/SMPTE_timecode). 
 
