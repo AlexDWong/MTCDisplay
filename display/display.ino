@@ -13,9 +13,6 @@ byte buf_temp[8];      //timecode buffer
 
 byte command, data, index;
 
-byte update_rate = 8;
-byte counter = 0;
-
 void display_write(uint8_t address, uint8_t value) {
   digitalWrite(LOAD_PIN, LOW); //Set CS to low
   SPI.transfer(address);
@@ -69,16 +66,14 @@ void serialEvent() {
     
   }
 
-  //counter++;
-  //if (counter >= update_rate) {
+  
+  if (index >= 0x07) {
     h = (buf_temp[7] & 0x01)*16 + buf_temp[6];
     m = buf_temp[5]*16 + buf_temp[4];
     s = buf_temp[3]*16 + buf_temp[2];
     f = buf_temp[1]*16 + buf_temp[0];
     display_timecode();
-    counter = 0;
-    
-  //}
+  }
   
 }
 
