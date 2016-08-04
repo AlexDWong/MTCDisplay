@@ -21,13 +21,13 @@ void display_write(uint8_t address, uint8_t value) {
 }
 
 void display_timecode() {
-  display_write(0x01, (f%10));
-  display_write(0x02, (f/10));
-  display_write(0x03, (s%10));
+  display_write(0x01, ((f%10)|0x80)); //enable decimal point on LSB
+  display_write(0x02, (f/10));        
+  display_write(0x03, ((s%10)|0x80)); 
   display_write(0x04, (s/10));
-  display_write(0x05, (m%10));
+  display_write(0x05, ((m%10)|0x80));
   display_write(0x06, (m/10));
-  display_write(0x07, (h%10));
+  display_write(0x07, ((h%10)|0x80));
   display_write(0x08, (h/10));
 }
 
@@ -48,9 +48,11 @@ void setup() {
   display_write(0x0B, 0x07);  //display all digits
   display_write(0x0C, 0x01);  //turn on chip
 
-  for (int i = 0x01; i <= 0x08; ++i) {
-    display_write(i, 0x00);
-  }  
+  for (int i = 0x01; i <= 0x08; i+=2) {
+    display_write(i, 0x80);
+    display_write(i+1, 0x00);
+  }
+  
 }
 
 void serialEvent() {
@@ -63,10 +65,8 @@ void serialEvent() {
     index = data >> 4;
     data &= 0x0F;   //clear packet ID
     buf_temp[index] = data;
-    
   }
 
-  
   if (index >= 0x07) {
     h = (buf_temp[7] & 0x01)*16 + buf_temp[6];
     m = buf_temp[5]*16 + buf_temp[4];
@@ -74,11 +74,8 @@ void serialEvent() {
     f = buf_temp[1]*16 + buf_temp[0];
     display_timecode();
   }
-  
 }
 
 void loop() {
-
-  
 }
   
