@@ -21,3 +21,4 @@ This is the current MTCDisplay, but the design **has not been proven**. The layo
   * Common-cathode design
   * Identical pinout (see [here](http://www.avagotech.com/products/leds-and-displays/7-segment/through-hole/hdsp-5523) for the HDSP-5523 datasheet)
   * The value of resistor R10 must be chosen to match the per-segment forward voltage and current for the new displays. See [Table 11 on page 11 of the MAX7219 datasheet](https://datasheets.maximintegrated.com/en/ds/MAX7219-MAX7221.pdf) for more information. 
+* DIP sockets may be excluded at yoru discression, but have been included in the BOM for prototyping purposes.
