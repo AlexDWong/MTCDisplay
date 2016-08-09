@@ -8,27 +8,30 @@
 #define LOAD_PIN 7    //Load/CS pin
 
 byte h, m, s, f;      //hours, minutes, seconds, frame
-byte buf_input[64];   //input buffer
-byte buf_temp[8];      //timecode buffer
-
+byte buf_temp[8];     //timecode buffer
 byte command, data, index;
 
+/*  Write VALUE to register ADDRESS on the MAX7219. */
 void display_write(uint8_t address, uint8_t value) {
-  digitalWrite(LOAD_PIN, LOW); //Set CS to low
+  digitalWrite(LOAD_PIN, LOW); //Toggle enable pin to load MAX7219 shift register
   SPI.transfer(address);
   SPI.transfer(value);
-  digitalWrite(LOAD_PIN, HIGH); //set CS to high
+  digitalWrite(LOAD_PIN, HIGH); 
 }
 
-void display_timecode() {
-  display_write(0x01, ((f%10)|0x80)); //enable decimal point on LSB
-  display_write(0x02, (f/10));        
-  display_write(0x03, ((s%10)|0x80)); 
+
+/*  Update Timecode display. Called once FRAMES LSB quarter-frame received to
+      avoid writing to chip every single time.
+*/
+void display_timecode() {   
+  display_write(0x02, ((f%10)|0x80)); //enable decimal point on LSB
+  display_write(0x06, (f/10));        
+  display_write(0x08, ((s%10)|0x80)); 
   display_write(0x04, (s/10));
-  display_write(0x05, ((m%10)|0x80));
-  display_write(0x06, (m/10));
-  display_write(0x07, ((h%10)|0x80));
-  display_write(0x08, (h/10));
+  display_write(0x03, ((m%10)|0x80));
+  display_write(0x07, (m/10));
+  display_write(0x05, ((h%10)|0x80));
+  display_write(0x01, (h/10));
 }
 
 void setup() {
@@ -44,30 +47,38 @@ void setup() {
   display_write(0x0F, 0x00);
 
   display_write(0x09, 0xFF);  //enable onboard bit decode (Mode B)
-  display_write(0x0A, 0x0F);  //max available intensity
+  display_write(0x0A, 0x0F);  //max intensity
   display_write(0x0B, 0x07);  //display all digits
   display_write(0x0C, 0x01);  //turn on chip
 
-  for (int i = 0x01; i <= 0x08; i+=2) {
-    display_write(i, 0x80);
-    display_write(i+1, 0x00);
+  //display all zeros, and add decimal points to LSB
+  for (int i = 0x01; i <= 0x08; ++i) {
+    display_write(i, 0x00);
   }
+  display_write(0x05, 0x80);  //
+  display_write(0x03, 0x80);
+  display_write(0x08, 0x80);
+  display_write(0x02, 0x80);
   
 }
 
+/*  Instead of using a while() loop, reduce power usage and increase performance using a UART interrupt handler.
+      When a quarter-frame TC packet is received, update the internal timecode buffer.
+      When the FRAMES LSB quarter-frame is received, also update the visual display.
+*/
 void serialEvent() {
   if (Serial.available() > 1) {
     command = Serial.read();
-    if (command != 0xF1) {
+    if (command != 0xF1) {    //realign quarter-frame packets
       command = Serial.read();
     }
     data = Serial.read();
-    index = data >> 4;
-    data &= 0x0F;   //clear packet ID
+    index = data >> 4;  //extract index/packet ID
+    data &= 0x0F;       //clear packet ID from data
     buf_temp[index] = data;
   }
 
-  if (index >= 0x07) {
+  if (index >= 0x07) {  //recalculate timecode once FRAMES LSB quarter-frame received
     h = (buf_temp[7] & 0x01)*16 + buf_temp[6];
     m = buf_temp[5]*16 + buf_temp[4];
     s = buf_temp[3]*16 + buf_temp[2];
