@@ -1,0 +1,13 @@
+(Coordinate 0,0 is lower left corner of PCB, dimensions in inches)
+The following holes should NOT be plated:
+
+
+Hole at (0.20, 0.20)
+Hole at (5.15, 0.20)
+Hole at (5.15, 3.40)
+Hole at (0.20, 3.40)
+Hole at (0.95, 3.39)
+Hole at (2.60, 2.70)
+Hole at (2.60, 1.85)
+
+All other holes should be plated. Please email if you have questions.
