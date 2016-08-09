@@ -1,11 +1,17 @@
 # MTCDisplay
 A simple MIDI Time Code (MTC) visual display using an Arduino Uno (ATMega328p) and a MAX7219.
 
+##Features:
+* 1x MIDI-IN, 3x MIDI-THRU (all MIDI connections are spec-compliant with the MIDI 1.0 specifications)
+* 12V DC input (max 1A)
+* Supports all MTC framerates (24, 25, 29.97-DROP, 30)
+* Mouting holes for custom enclosures, as well as clearance on edges of the PCB for insertion into extruded aluminum enclosures
+
 MTCDisplay accepts input from a MIDI Timecode stream and displays it on a large, 7-segment display. The displays are driven and controlled by a MAX7219 driver, enabling the Arduino to focus on decoding the MIDI Timecode stream. MTCDisplay supports all four MTC framerates (24/25/29.97 drop-frame/30 frames/s), and the design can be scaled up to support almost any 7-segment, common-cathode LED display. Future work will attempt to integrate:
 
-* MIDI Thru capability, enabling MTCDisplay to daisy-chain the timecode stream to other devices
 * Visual indication of framerate
-* A custom PCB and enclosure
+* A custom enclosure for enhanced durabiltiy
+* MIDI Timecode generation
 * Linear Timecode (LTC) capability
 
 ##"What's (MIDI) Timecode?"
@@ -51,4 +57,4 @@ Quarter-frame Timecode = `F1 04 F1 10 F1 23 F1 30 F1 42 F1 50 F1 61 F1 76`
 
 If the timecode stream suddenly jumps (i.e. jumping ahead in an audio track) a full timecode is sent so that all equipment can resync. Full timecode messages are 10 bytes long, and once transmitted the MTC stream reverts back to quarter-frame messages; full timecode messages are structured as follows:
 	`F0 7F 7F 01 01 hh mm ss ff F7`
-
+In it's current state, MTCDisplay only supports quarter-frame messages. If the timecode input jumps, the change will not be reflected on MTCDisplay until the next quarter-frame message is received.
