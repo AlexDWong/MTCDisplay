@@ -1,9 +1,9 @@
 # MTCDisplay
-A simple MIDI Time Code (MTC) visual display using an Arduino Uno (ATMega328p) and a MAX7219.
+A MIDI Timecode (MTC) visual display utilizing an ATMega328P microprocessor and 7-segment displays. The goal of this project was to create a simple display to enable lighting, audio, and video equipment operators to visually monitor a timecode stream without spending $400+ on a fully-integrated solution.
 
 ##Features:
 * 1x MIDI-IN, 3x MIDI-THRU (all MIDI connections are spec-compliant with the MIDI 1.0 specifications)
-* 12V DC input (max 1A)
+* 7-18V DC input (12V nominal, max 1A)
 * Supports all MTC framerates (24, 25, 29.97-DROP, 30)
 * Mouting holes for custom enclosures, as well as clearance on edges of the PCB for insertion into extruded aluminum enclosures
 
