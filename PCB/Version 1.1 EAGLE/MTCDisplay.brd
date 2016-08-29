@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1575,24 +1575,24 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <library name="con-millmax">
 <packages>
 <package name="299-XX-43-618-10-002000">
-<pad name="1" x="-10.16" y="-1.3716" drill="0.7"/>
-<pad name="2" x="-7.62" y="-1.3716" drill="0.7"/>
-<pad name="3" x="-5.08" y="-1.3716" drill="0.7"/>
-<pad name="4" x="-2.54" y="-1.3716" drill="0.7"/>
-<pad name="5" x="0" y="-1.3716" drill="0.7"/>
-<pad name="6" x="2.54" y="-1.3716" drill="0.7"/>
-<pad name="7" x="5.08" y="-1.3716" drill="0.7"/>
-<pad name="8" x="7.62" y="-1.3716" drill="0.7"/>
-<pad name="9" x="10.16" y="-1.3716" drill="0.7"/>
-<pad name="10" x="10.16" y="6.2484" drill="0.7"/>
-<pad name="11" x="7.62" y="6.2484" drill="0.7"/>
-<pad name="12" x="5.08" y="6.2484" drill="0.7"/>
-<pad name="13" x="2.54" y="6.2484" drill="0.7"/>
-<pad name="14" x="0" y="6.2484" drill="0.7"/>
-<pad name="15" x="-2.54" y="6.2484" drill="0.7"/>
-<pad name="16" x="-5.08" y="6.2484" drill="0.7"/>
-<pad name="17" x="-7.62" y="6.2484" drill="0.7"/>
-<pad name="18" x="-10.16" y="6.2484" drill="0.7"/>
+<pad name="1" x="-10.16" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="2" x="-7.62" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="3" x="-5.08" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="4" x="-2.54" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="5" x="0" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="6" x="2.54" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="7" x="5.08" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="8" x="7.62" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="9" x="10.16" y="-1.3716" drill="0.7" diameter="1.4224"/>
+<pad name="10" x="10.16" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="11" x="7.62" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="12" x="5.08" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="13" x="2.54" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="14" x="0" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="15" x="-2.54" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="16" x="-5.08" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="17" x="-7.62" y="6.2484" drill="0.7" diameter="1.4224"/>
+<pad name="18" x="-10.16" y="6.2484" drill="0.7" diameter="1.4224"/>
 <rectangle x1="-11.4046" y1="-6.985" x2="11.4046" y2="-4.191" layer="51"/>
 <wire x1="-11.4046" y1="-4.191" x2="-11.4046" y2="7.493" width="0.127" layer="51"/>
 <wire x1="-11.4046" y1="7.493" x2="11.4046" y2="7.493" width="0.127" layer="51"/>
@@ -3094,6 +3094,19 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="C5" pad="2"/>
 <contactref element="C4" pad="2"/>
 <contactref element="C11" pad="-"/>
+<via x="90.17" y="19.05" extent="1-16" drill="0.6"/>
+<via x="74.93" y="19.05" extent="1-16" drill="0.6"/>
+<via x="58.42" y="19.05" extent="1-16" drill="0.6"/>
+<via x="67.31" y="15.24" extent="1-16" drill="0.6"/>
+<via x="45.72" y="19.05" extent="1-16" drill="0.6"/>
+<via x="25.4" y="19.05" extent="1-16" drill="0.6"/>
+<via x="41.91" y="50.8" extent="1-16" drill="0.6"/>
+<via x="32.385" y="60.96" extent="1-16" drill="0.6"/>
+<via x="32.385" y="58.42" extent="1-16" drill="0.6"/>
+<via x="32.385" y="55.88" extent="1-16" drill="0.6"/>
+<via x="32.385" y="53.34" extent="1-16" drill="0.6"/>
+<via x="30.48" y="50.8" extent="1-16" drill="0.6"/>
+<wire x1="45.72" y1="19.05" x2="43.18" y2="30.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V">
 <contactref element="R2" pad="2"/>
