@@ -1,6 +1,6 @@
 #PCB Files
 
-Enclosed here are the files needed to have a PCB manufactured, as well as a Bill of Materials. There are currently **two** revisions; **both revisions use identical parts and share the same BOM**:
+Enclosed here are the files needed to have a PCB manufactured, as well as a Bill of Materials. There are currently **two** revisions; **~~both revisions use identical parts and share the same BOM~~**: **Revision 1.1 is currently being updated with a new BOM**
 
 ##Version 1.0
 
