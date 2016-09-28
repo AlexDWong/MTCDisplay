@@ -1,26 +1,43 @@
 # MTCDisplay
-A MIDI Timecode (MTC) visual display utilizing an ATMega328P microprocessor and 7-segment displays. The goal of this project was to create a simple display to enable lighting, audio, and video equipment operators to visually monitor a timecode stream without spending $400+ on a fully-integrated solution.
 
-##Features:
-* 1x MIDI-IN, 3x MIDI-THRU (all MIDI connections are spec-compliant with the MIDI 1.0 specifications)
-* 7-18V DC input (12V nominal, max 1A)
-* Supports all MTC framerates (24, 25, 29.97-DROP, 30)
-* Mouting holes for custom enclosures, as well as clearance on edges of the PCB for insertion into extruded aluminum enclosures
+![Front](/PCB/V1.1/Front.jpg)
 
+## Description
+MTCDisplay is an Arduino-based MIDI Timecode visual display that allows users to view a MIDI Timecode stream on an external LED display. The goal of this project was to create a simple display to enable lighting, audio, and video equipment operators to visually monitor a timecode stream without spending $400+ on a fully-integrated solution.
+
+## Updates
+**9/28/2016:** Board version 1.1; see directory for changes.
+
+**8/8/2016:** Board version 1.0 proven.
+
+## Features
+* MIDI IN/THRU (DIN-5 connector)
+  * 1x MIDI IN
+  * Up to 3x MIDI THRU
+* 12VDC input with polarity and over-current protection
+* Supports all MTC framerates (24, 25, 29.97, 30)
+* Mounting holes for custom enclosures and edge clearance for extruded aluminum enclosures
+
+## Physical
+* Board Dimensions: 5.00" x 3.35" (127mm x 85.09mm)
+* Board Thickness: 1.6mm
+* Input Power: +12VDC, 1A (max)
+* Input Connections: 2.1mm DC barrel jack, MIDI (DIN-5)
+* Output Connections: Up to 3x MIDI (DIN-5)
+* Mounting: 4x 0.125" holes at edges of board, 0.1" clearance on sides for insertion into extruded aluminum case
+
+
+## How it works
 MTCDisplay accepts input from a MIDI Timecode stream and displays it on a large, 7-segment display. The displays are driven and controlled by a MAX7219 driver, enabling the Arduino to focus on decoding the MIDI Timecode stream. MTCDisplay supports all four MTC framerates (24/25/29.97 drop-frame/30 frames/s), and the design can be scaled up to support almost any 7-segment, common-cathode LED display. Future work will attempt to integrate:
 
-* Visual indication of framerate
-* A custom enclosure for enhanced durabiltiy
-* MIDI Timecode generation
-* Linear Timecode (LTC) capability
 
-##"What's (MIDI) Timecode?"
+### "What's (MIDI) Timecode?"
 
 Timecode is a way to synchronize equipment with each other.; for instance, an audio track could output a timecode stream to a lighting console so that lighting cues are triggered at exactly the right moment. [MIDI Timecode (MTC)](https://en.wikipedia.org/wiki/MIDI_timecode) is timecode transmitted between devices using the MIDI protocol and interface, and is based off [SMPTE Timecode](https://en.wikipedia.org/wiki/SMPTE_timecode). 
 
 You can read more about the MIDI protocol on [Wikipedia](https://en.wikipedia.org/wiki/MIDI) or on the o[fficial MIDI Association website](https://www.midi.org/). 
 
-##MIDI Timecode
+### MIDI Timecode
 
 MIDI Timecode follows the SMPTE standard for timecode. Each timecode is represented as four 8-bit unsigned integers:
 * Hours (hh)
@@ -32,7 +49,7 @@ Hours, minutes and seconds are self-explanatory. Frames are sub-divisions of sec
 
 MIDI Timecode messages can take one of two forms:
 
-###Quarter-frame Timecode
+#### Quarter-frame Timecode
 
 Quarter-frame Timecode messages are used when the timecode stream is running. Each hour, minute, second or frame byte is broken down into two 4-bit values and attached to a 3-bit identifier. Before each piece is sent, it is preceded by a single status byte (0xF1).
 
@@ -53,7 +70,7 @@ Quarter-frame Timecode = `F1 04 F1 10 F1 23 F1 30 F1 42 F1 50 F1 61 F1 76`
 
 *Source: [Wikipedia](https://en.wikipedia.org/wiki/MIDI_timecode)*
 
-###Full Timecode
+#### Full Timecode
 
 If the timecode stream suddenly jumps (i.e. jumping ahead in an audio track) a full timecode is sent so that all equipment can resync. Full timecode messages are 10 bytes long, and once transmitted the MTC stream reverts back to quarter-frame messages; full timecode messages are structured as follows:
 	`F0 7F 7F 01 01 hh mm ss ff F7`
