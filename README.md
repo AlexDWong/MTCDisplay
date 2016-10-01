@@ -28,14 +28,14 @@ MTCDisplay is an Arduino-based MIDI Timecode visual display that allows users to
 
 
 ## How it works
-MTCDisplay accepts input from a MIDI Timecode stream and displays it on a large, 7-segment display. The displays are driven and controlled by a MAX7219 driver, enabling the Arduino to focus on decoding the MIDI Timecode stream. MTCDisplay supports all four MTC framerates (24/25/29.97 drop-frame/30 frames/s), and the design can be scaled up to support almost any 7-segment, common-cathode LED display. Future work will attempt to integrate:
+MTCDisplay accepts input from a MIDI Timecode stream and displays it on a large, 7-segment display. The displays are driven and controlled by a MAX7219 driver, enabling the Arduino to focus on decoding the MIDI Timecode stream. MTCDisplay supports all four MTC framerates (24/25/29.97 drop-frame/30 frames/s), and the design can be scaled up to support almost any 7-segment, common-cathode LED display.
 
 
 ### "What's (MIDI) Timecode?"
 
-Timecode is a way to synchronize equipment with each other.; for instance, an audio track could output a timecode stream to a lighting console so that lighting cues are triggered at exactly the right moment. [MIDI Timecode (MTC)](https://en.wikipedia.org/wiki/MIDI_timecode) is timecode transmitted between devices using the MIDI protocol and interface, and is based off [SMPTE Timecode](https://en.wikipedia.org/wiki/SMPTE_timecode). 
+Timecode is a way to synchronize equipment with each other; for instance, an audio track could output a timecode stream to a lighting console so that lighting cues are triggered at exactly the right moment. [MIDI Timecode (MTC)](https://en.wikipedia.org/wiki/MIDI_timecode) is timecode transmitted between devices using the MIDI protocol and interface, and is based off [SMPTE Timecode](https://en.wikipedia.org/wiki/SMPTE_timecode). 
 
-You can read more about the MIDI protocol on [Wikipedia](https://en.wikipedia.org/wiki/MIDI) or on the o[fficial MIDI Association website](https://www.midi.org/). 
+You can read more about the MIDI protocol on [Wikipedia](https://en.wikipedia.org/wiki/MIDI) or on the [official MIDI Association website](https://www.midi.org/). 
 
 ### MIDI Timecode
 
@@ -62,7 +62,7 @@ Quarter-frame Timecode messages are used when the timecode stream is running. Ea
 | 4     | `0100` | `mmmm` | `0100 mmmm` | Minutes lsbits      |
 | 5     | `0101` | `00mm` | `0101 00mm` | Minutes msbits      |
 | 6     | `0110` | `hhhh` | `0110 hhhh` | Hour lsbits         |
-| 7     | `0111` | `0rrh` | `0111 0rrh` | Rate and hour msbit |
+| 7     | `0111` | `0rrh` | `0111 0rrh` | Hour msbit and rate |
 
 **EX:** Timecode = 01:02:03:04, framerate = 30 frames/s
 
